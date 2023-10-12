@@ -12,7 +12,7 @@ current_file_checked=1
 for file in qualitysummary/*.txt;do
     cat $file #show the summary first 
     while true;do #make infinte loops to check the input of user
-        read -p "Do you think its quality is good?(y/n/stoploop)----------------if stoploop u need to do them again from the beginning" choice #ask for an input and save it to variable choice
+        read -p "Do you think its quality is good?(y/n/stoploop)----------------if stoploop u need to do them again from the beginning: " choice #ask for an input and save it to variable choice
         #ask the user to decide to data qulity.
         percent=$(echo "scale=2 ;($current_file_checked/$total_file)*100" | bc) #caculate the compeleted percentage (bc ,learned from google)
         echo " ---------------------------------------------------------------($current_file_checked/$total_file)$percent % compeleted"
@@ -30,3 +30,9 @@ if ((current_file_checked >= total_file));then
 else
     echo " Mission failed , TRY AGAIN. "
 fi
+
+good_num=$(ls good_quality | wc -l)
+bad_num=$(ls bad_quality | wc -l)
+echo "There are $good_num good quality files."
+echo "There are $bad_num bad quality files."
+#These codes are used for caculating the number of good/bad files.
