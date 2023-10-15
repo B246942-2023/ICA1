@@ -28,7 +28,7 @@ while read -r line;do
 
                 if [[ "$Sampletype" == "$type1" && "$Treatment" == "$type2" && "$Time" == "$type3" ]];then #match the type of files
                     if [[ -e align_out/Tco-"$Samplenumber".bam ]];then # if that file exsit, some files have been removed by quality check.
-                        #mv align_out/Tco-"$Samplenumber".bam align_out/Tco-"$Samplenumber"_"$type1"_"$type2"_"$type3"_g"$grouptype".bam #add suffix to file to classify
+                        mv align_out/Tco-"$Samplenumber".bam align_out/Tco-"$Samplenumber"_"$type1"_"$type2"_"$type3"_g"$grouptype".bam #add suffix to file to classify
                         echo "Tco-$Samplenumber is "$type1"_"$type2"_"$type3"_g"$grouptype"" 
                     fi
                 fi
