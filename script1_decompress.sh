@@ -24,10 +24,10 @@ for file in $input_dir;do
     ((thread_now+=2)) # need two threads for fastqc each loop
     
     if ((thread_now >= thread_max ));then #this loop just to make sure our threads would not tooo much 
-        wait
+        wait # if there are too much we should wait(learnt from my friend google)
         thread_now=0
     fi
 done
-wait
+wait #make sure all the threads are finished before my  next command 
 
 
