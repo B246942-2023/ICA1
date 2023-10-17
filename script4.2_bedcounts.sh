@@ -15,6 +15,7 @@ bedfile=TriTrypDB-46_TcongolenseIL3000_2019.bed
 
 rm -f align_out/*.bai #rm all index created before(if there )
 samtools index -M -@ 12 align_out/*.bam
+#-M means it can input multiply bamfiles at a time , -@ 12 means use 12 treads
 #make index for all bam files first (must for multicov)
 
 #generate bedfile by grouptype :g1,g2,g3,g4......g15
