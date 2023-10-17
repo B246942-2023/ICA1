@@ -1,8 +1,14 @@
 #!/usr/bin/bash
-
+echo "----------------------------------------------------------------------------------------------------------"
+echo "STEP3:START!
+STEP3:Align:Mapping our fq reads onto the comple genome."
+echo "----------------------------------------------------------------------------------------------------------"
+echo "STEP3.1:Pairs check:You may have removed some data in the STEP2, so some data may not in pairs.
+if some data are not in pairs, it will be romoved.
+Running Time Estimation : 0.1s"
 #first,their maybe some files are not in pairs (_1_,_2_),because the quality check, we should consider that possibility.
-echo "First,we need to check whether the data in good_quality are in pairs.(Your quality check may delete some data.) Press any key to continue=v= .........."
-read -n1 -s # -n1 :return when read the first input str ,-s :make the input undisplayed
+read -n1 -sp "Press any key to continue......" # -n1 :return when read the first input str ,-sp :make the input undisplayed and show some information
+echo
 
 rm -rf lackpairs
 mkdir -p lackpairs #I want mv them in to this folder then we make align in good_quality
@@ -11,36 +17,48 @@ lackfile=$(ls good_quality | awk 'BEGIN{FS="_"}{print $1"_"$3}' | sort | uniq -c
 #Tco-122_1_summary.txt
 #split the filename by the delimiter_ ,then print $1_$3 (Tco-122_summary.txt),remove the influence of _1_and _2_,then sort it | uniq -c will tell me how many "Tco-122_summary.txt" are there
 #if that uniq -c is not 2 ,than means this file lacks its pairs, we are not able to make a Double-ended alignment
+
+
 lackfile_num=$(echo "$lackfile" | wc -l) # Spend much time doing this count ,the important thing is that "" ,make the table can be counted
 if [[ -z "$lackfile" ]]; then #judge the if lackfile is empty
-    echo "All data are in pairs/No goodqualitydata ,let's align"
+    echo "All data are in pairs/No goodqualitydata ,ready for align"
+    read -n1 -sp "Press any key to continue......"
+    echo
 else #if there are unpair data, mv it to lackpairs folder
     echo "There are $lackfile_num unpaired data"
     echo "$lackfile"
-    echo "These data(in good_quality folder) will be sent to "lackpairs" folder.Press any key to continue =v=.........." 
+    echo "These data in folder(good_quality) will be sent to folder(lackpairs) .
+    Press any key to continue......." 
     read -n1 -s # -n1 :return when read the first input str ,-s :make the input undisplayed
     for misspair in $lackfile;do 
         rmname=$(basename $misspair _summary.txt) #name in lackfile is like  :Tco-124_summary.txt
         mv  good_quality/$rmname* lackpairs
         echo "$rmname has been sent to prison(lackpairs folder)"
     done
-    echo "rm finished , let's align" 
+    echo "Removement finished , ready for align" 
+    read -n1 -sp "Press any key to continue......"
+    echo
 fi 
 
 #######################################################################################################################################
-
-echo "Second,we need to make a index of Tcongo_genome.Press any key to continue =v= .........."
-read -n1 -s # -n1 :return when read the first input str ,-s :make the input undisplayed
+echo "----------------------------------------------------------------------------------------------------------"
+echo "STEP3.2:Index: make a index of Tcongo_genome.
+Running Time Estimation : 20 s"
+read -n1 -sp "Press any key to continue......"
+echo
 
 rm -rf Tcongo_genome
 cp -r /localdisk/data/BPSM/ICA1/Tcongo_genome/ .
-bowtie2-build Tcongo_genome/* Tcongo_genome/Tcongo_genome_index #only one file called  "TriTrypDB-46_TcongolenseIL3000_2019_Genome.fasta.gz"  in that folder
+bowtie2-build --threads 16 Tcongo_genome/* Tcongo_genome/Tcongo_genome_index #only one file called  "TriTrypDB-46_TcongolenseIL3000_2019_Genome.fasta.gz"  in that folder
+#--threads 16 means 16 threads 
 #build an index for align first , we put it in the Tcogo_genome folder
 echo "Index built compeleted!"
 #######################################################################################################################################
-
-echo "Third,align.Press any key to continue =v= .........."
-read -n1 -s # -n1 :return when read the first input str ,-s :make the input undisplayed
+echo "----------------------------------------------------------------------------------------------------------"
+echo "STEP3.3:Align: Make an aligning with bowtie2
+Running Time Estimation : 30s"
+read -n1 -sp "Press any key to continue......"
+echo
 
 rm -rf align_out
 mkdir -p align_out
@@ -66,5 +84,6 @@ for file in good_quality/*_1_summary.txt;do  #name in good_quality is like Tco-1
     fi
 done
 wait #make sure all the threads are finished before my  next command 
-
-echo -e "Align program finished! Check folder align_out to see your results "
+echo "----------------------------------------------------------------------------------------------------------"
+echo "STEP3:Successful!"
+echo "Results saved in folder(align_out)"

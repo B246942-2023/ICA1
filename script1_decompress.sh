@@ -1,4 +1,9 @@
 #!/usr/bin/bash
+echo "----------------------------------------------------------------------------------------------------------"
+echo "STEP1:START!
+STEP1:decompress all fastqc files
+Running Time Estimation : 20s"
+read -n1 -sp "Press any key to continue......"
 
 rm -rf fastq
 rm -rf fastq_decompress
@@ -29,5 +34,7 @@ for file in $input_dir;do
     fi
 done
 wait #make sure all the threads are finished before my  next command 
-
+echo "----------------------------------------------------------------------------------------------------------"
+echo "STEP1:Successfull!
+All files are saved in folder(fastq_decompress)"
 

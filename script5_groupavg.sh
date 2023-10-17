@@ -1,4 +1,9 @@
 #!/usr/bin/bash
+echo "----------------------------------------------------------------------------------------------------------"
+echo "STEP5:START!"
+echo "STEP5:Group avg: It will generate the avg of technical replicates in the same group"
+read -n1 -sp "Press any key to continue......"
+echo
 
 rm -rf avg
 mkdir -p avg
@@ -19,3 +24,7 @@ mkdir -p avg
         { print $4 "\t" $5 "\t" avg }
     }'  $file > avg/$outputname2
 done
+
+echo "----------------------------------------------------------------------------------------------------------"
+echo "STEP5:Successful!
+Results saved in folder(avg)"
