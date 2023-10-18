@@ -84,7 +84,8 @@ for file in good_quality/*_1_summary.txt;do  #name in good_quality is like Tco-1
         thread_now=0
     fi
 done
-wait #make sure all the threads are finished before my  next command 
+wait # IMPORTANT: We use multithreads before ,if there is no this wait ,the next line rm will start, so some threads can not work any more
+rm -rf Tcongo_genome # make the homepage tidy.
 echo "----------------------------------------------------------------------------------------------------------"
-echo "STEP3:Successful!"
+echo "STEP3:Finished!"
 echo "Results saved in folder(align_out)"

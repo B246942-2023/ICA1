@@ -35,6 +35,6 @@ for file in $input_dir;do
 done
 wait #make sure all the threads are finished before my  next command 
 echo "----------------------------------------------------------------------------------------------------------"
-echo "STEP1:Successfull!
+echo "STEP1:Finished!
 All files are saved in folder(fastq_decompress)"
 

@@ -61,7 +61,7 @@ while true;do
     esac
     while true ; do
         echo "----------------------------------------------------------------------------------------------------------"
-        read -p "Is the program sucessful,if there is NO error please input y?(y/n):" status_add
+        read -p "Is the current STEP program sucessful,if there is NO error please input y?(y/n):" status_add
         case $status_add in
             y)  
                 status_num=$(cat status)
@@ -78,6 +78,8 @@ while true;do
     done
     if [[ "$status_num" == 7 ]];then
         rm -f status
+        echo "----------------------------------------------------------------------------------------------------------"
+        echo "Program finished! Thank you for using!"
         exit
     fi
 done

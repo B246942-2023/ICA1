@@ -106,5 +106,5 @@ done
 wait
 rm -f TriTrypDB-46_TcongolenseIL3000_2019.bed # I want my ICAfolder is clean.
 echo "----------------------------------------------------------------------------------------------------------"
-echo "STEP4:Successful!
+echo "STEP4:Finished!
 Results saved in folder(bedcounts)"

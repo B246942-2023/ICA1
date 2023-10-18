@@ -27,5 +27,5 @@ mkdir -p avg
 done
 
 echo "----------------------------------------------------------------------------------------------------------"
-echo "STEP5:Successful!
+echo "STEP5:Finished!
 Results saved in folder(avg)"
