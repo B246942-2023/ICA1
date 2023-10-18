@@ -1,7 +1,8 @@
 #!/usr/bin/bash
 echo "----------------------------------------------------------------------------------------------------------"
 echo "STEP5:START!"
-echo "STEP5:Group avg: It will generate the avg of technical replicates in the same group"
+echo "STEP5:Group avg: It will generate the avg of technical replicates in the same group
+Running Time Estimation: 0.1s"
 read -n1 -sp "Press any key to continue......"
 echo
 

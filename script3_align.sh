@@ -3,7 +3,7 @@ echo "--------------------------------------------------------------------------
 echo "STEP3:START!
 STEP3:Align:Mapping our fq reads onto the comple genome."
 echo "----------------------------------------------------------------------------------------------------------"
-echo "STEP3.1:Pairs check:You may have removed some data in the STEP2, so some data may not in pairs.
+echo "STEP3.1:Pairs check:You may have removed some bad quality data in the STEP2, so some good data may not in pairs.
 if some data are not in pairs, it will be romoved.
 Running Time Estimation : 0.1s"
 #first,their maybe some files are not in pairs (_1_,_2_),because the quality check, we should consider that possibility.
@@ -21,7 +21,8 @@ lackfile=$(ls good_quality | awk 'BEGIN{FS="_"}{print $1"_"$3}' | sort | uniq -c
 
 lackfile_num=$(echo "$lackfile" | wc -l) # Spend much time doing this count ,the important thing is that "" ,make the table can be counted
 if [[ -z "$lackfile" ]]; then #judge the if lackfile is empty
-    echo "All data are in pairs/No goodqualitydata ,ready for align"
+    echo "----------------------------------------------------------------------------------------------------------"
+    echo "All data are in pairs ,ready for align"
     read -n1 -sp "Press any key to continue......"
     echo
 else #if there are unpair data, mv it to lackpairs folder
