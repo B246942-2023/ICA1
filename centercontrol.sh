@@ -73,7 +73,8 @@ while true;do
     menu
     case $choice in
         1)  
-            execute_num=1 ;;
+            execute_num=1 
+            echo "1" > status;;
         2) 
             execute_num=$(cat status) ;;
         3) 

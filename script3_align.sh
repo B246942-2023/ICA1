@@ -77,7 +77,7 @@ for file in good_quality/*_1_summary.txt;do  #name in good_quality is like Tco-1
         bowtie2 -x Tcongo_genome/Tcongo_genome_index -1 fastq/$filename1 -2 fastq/$filename2 | samtools view -bS | samtools sort -@2 -o align_out/$outputname.bam 
     }&  #-@ 2 make it run samtools with 2 cores ,it should not be too much 
         # & make it multithreads
-    ((thread_now+=3)) # need 3 threads for fastqc each loop (1for bowtie 2 for samtool)
+    ((thread_now+=4)) # need 3 threads for fastqc each loop (1for bowtie 3 for samtool)
     #echo $thread_now #for debugging
     if ((thread_now>=thread_max));then
         wait # if there are too much we should wait(learnt from my friend google)
@@ -86,6 +86,8 @@ for file in good_quality/*_1_summary.txt;do  #name in good_quality is like Tco-1
 done
 wait # IMPORTANT: We use multithreads before ,if there is no this wait ,the next line rm will start, so some threads can not work any more
 rm -rf Tcongo_genome # make the homepage tidy.
-echo "----------------------------------------------------------------------------------------------------------"
+echo "----------------------------------------------------------------------------------------------------------
+This STEP3 sometimes will have error (once in ten)because of multi threads
+If there is something abnormal.Just run again.Don't worry!"
 echo "STEP3:Finished!"
 echo "Results saved in folder(align_out)"

@@ -1,11 +1,5 @@
 #!/usr/bin/bash
 
-rm -rf good_quality
-rm -rf bad_quality
-mkdir -p good_quality
-mkdir -p bad_quality
-#make some dir to save my quality data,make sure they have no original data
-
 while true;do #infinite loop for inputting
     echo "----------------------------------------------------------------------------------------------------------"
     read -p "How many PASS is acceptable(Threhold)? From 0 to 10(Recommend:7) :" threhold #let user input his threhold of PASS
